@@ -1,12 +1,18 @@
 package tests;
 
 import org.testng.annotations.Test;
+import controllers.UserCtrls;
 
-import base.BaseClass;
-
-public class UsersTests extends BaseClass{
-	@Test
+public class UsersTests {
+	final private UserCtrls _ctrl = new UserCtrls();
+	
+	@Test ( priority=1 )
 	public void registrerUser() {
-		System.out.println("TEST PASSED!");
+		_ctrl.registrer();
+	}
+	
+	@Test ( priority=2 )
+	public void loginUser() {
+		_ctrl.login();
 	}
 }

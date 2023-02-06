@@ -31,12 +31,13 @@ public class UserCtrls extends BaseClass {
 	private WebElement _btnRegister;
 	private WebElement _txtLoggedUserName;
 	
-	public void registrerUser() {
+	public void registrer() {
 	    System.out.println("CreateAccount.Run() started");
-	    //Loading main page        
+	    //Loading main page       
+	    _generalHelpers.waitMiliseconds(3000);
 	    bindUI();   //Binding/Initializing controls for main page        
 	    _btnUser.click();
-	    waitMiliseconds(1000);
+	    _generalHelpers.waitMiliseconds(1000);
 	    _btnNewUser.click();
 	    //Loading register page        
 	    _generalHelpers.implicitWaitSecs(3);
@@ -49,7 +50,7 @@ public class UserCtrls extends BaseClass {
 	    _generalHelpers.implicitWaitSecs(3); 
 	    _btnRegister.click();
 	    //ImplicitWaitSecs(3); //It doesn't work        
-	    waitMiliseconds(3000);
+	    _generalHelpers.waitMiliseconds(3000);
 	    //Loading main page again        
 	    String loggedUser = _txtLoggedUserName.getText();
 	    System.out.println("Current User has logged in: " + loggedUser);
@@ -70,15 +71,6 @@ public class UserCtrls extends BaseClass {
 	    _txtPassAgain = driver.findElement(By.name(_nameConfPassTxt));
 	    _checkIAgree = driver.findElement(By.name(_nameIAgreeCheck));
 	    _btnRegister = driver.findElement(By.id(_idRegisterBtn));
-	}
-	
-	public void waitMiliseconds(int milisec) {
-	    //driver.manage().timeouts().implicitlyWait(sec, TimeUnit.SECONDS);        
-	    try {
-	        Thread.sleep(milisec);
-	    } catch (InterruptedException e) {
-	        // TODO Auto-generated catch block            e.printStackTrace();
-	    }
 	}
 	
 	public void login(){
