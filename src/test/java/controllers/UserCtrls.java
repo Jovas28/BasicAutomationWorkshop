@@ -9,8 +9,6 @@ import helpers.GeneralHelpers;
 
 public class UserCtrls extends BaseClass {
 	final private GeneralHelpers _generalHelpers = new GeneralHelpers();
-		
-	
 	// References for web controls    
 	final private String _xpathUserBtn = "//a[@id='hrefUserIcon']";
 	final private String _xpathCreateUserBtn = "//a[normalize-space()='CREATE NEW ACCOUNT']";
@@ -21,6 +19,7 @@ public class UserCtrls extends BaseClass {
 	final private String _nameIAgreeCheck = "i_agree";
 	final private String _idRegisterBtn = "register_btnundefined";
 	final private String _xpathLoggedUserName = "//a[@id='menuUserLink']";
+	final private String _xpathBtnSign = "//button[@id=\"sign_in_btnundefined\"]";
 	// Web controls    
 	public  WebElement _btnUser;
 	private WebElement _btnNewUser;
@@ -80,5 +79,17 @@ public class UserCtrls extends BaseClass {
 	    } catch (InterruptedException e) {
 	        // TODO Auto-generated catch block            e.printStackTrace();
 	    }
+	}
+	
+	public void login(){
+	    driver.findElement(By.id("menuUser")).click(); // Click on user icon
+	    // Input credentials
+	    driver.findElement(By.name("username")).sendKeys(USER_NAME); 
+	    driver.findElement(By.name("password")).sendKeys(PASS);
+	    driver.findElement(By.xpath(_xpathBtnSign)).click(); // Click on Sign in
+	    WebElement txtUserLogged = driver.findElement(
+	    	By.xpath("//*[text()='" + USER_NAME+ "' and @class='hi-user containMiniTitle ng-binding']")
+	    ); // Check if the user login was success full
+	    Assert.assertEquals(USER_NAME, txtUserLogged.getText());
 	}
 }
